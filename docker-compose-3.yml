@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  giropops-senhas:
+    image: nataliagranato/linuxtips-giropops-senhas:72c0140-20240328202320
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - REDIS_HOST=redis
+    volumes:
+      - natalia:/granato
+    depends_on:
+      - redis
+
+  redis:
+    container_name: redis
+    image: redis:alpine3.19
+
+networks:
+  giropops-senhas:
+    driver: bridge
+
+volumes:
+ natalia:
